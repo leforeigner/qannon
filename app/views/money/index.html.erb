@@ -1,0 +1,34 @@
+<h1></h1>
+<p>※現在、購入した記録の一覧です。</p>
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <th>日付</th>
+        <th>項目</th>
+        <th>金額</th>
+        <th>分類</th>
+        <th>コメント</th>
+    </tr>
+    <% @money.each do |money| %>
+    <tr>
+        <td width="35px"><%= obj.id %></td>
+        <td><%= money.date %></td>
+        <td><%= money.item %></td>
+        <td><%= money.price %></td>
+        <td><%= money.category %></td>
+        <td><%= money.memo %></td>
+        <td><a href="/money/edit/<%= obj.id %>">編集</td>
+        <td><a href="javascript:delData(
+            <%= (obj.id.to_s + ",'".to_s + obj.item.to_s).html_safe %>')">削除</a></td>
+    </tr>
+    <% end %>
+</table>
+<p><a href="/money/add">※新しい項目を入力 &gt;&gt;</a></p>
+
+<script>
+function delData(id,item){
+    if (confirm('「' + item + '」のデータを削除しますか？')){
+        document.location = "/money/delete/" + id;
+    }
+}
+</script>
